@@ -22,43 +22,18 @@
 
 using namespace Graph_lib;
 
-int main(int argc, char ** argv)
-{
-	Logica principal;
+	int main(int argc, char ** argv)
+	{
+		Logica principal;
 
-	int width = 1990, height = 80;
-	int rowmax = 4, colmax = 7;
+		int width = 90, height = 80;
+		int rowmax = 4, colmax = 7;
 
-	principal.set_window(width, height, rowmax, colmax);
+		principal.set_window(width, height, rowmax, colmax);
 
-	principal.input = new Fl_Int_Input(width + 10, rowmax * height + 20, width, 30, "N° de Nodos");
-	principal.input->labelfont(FL_BOLD + FL_ITALIC); principal.input->labelcolor(FL_WHITE);
+		principal.ejecutar->callback(principal.F_Ejecutar, &principal);
+		principal.salir->callback(principal.F_Salir, principal.window);
 
-	Fl_Button* ejecutar = new Fl_Button(width * 2 + 20, rowmax * height + 20, width, 30, "Ejecutar"); ejecutar->color(FL_DARK_BLUE); ejecutar->labelcolor(FL_WHITE);
-	Fl_Button* salir = new Fl_Button(width * 3 + 30, rowmax * height + 20, width, 30, "Salir"); salir->color(FL_DARK_BLUE); salir->labelcolor(FL_WHITE);
-
-	Circle c(Point(200, 200), 10);
-	c.set_fill_color(Color::red);
-	Lines x;
-	x.add(Point{ 100,100 }, Point{ 200,100 });
-	x.set_fill_color(Color::red);
-
-	
-
-	//sw.attach(x);
-
-	ejecutar->callback(principal.F_Ejecutar, &principal);
-	salir->callback(principal.F_Salir, principal.window);
-	int columnas = 0;
-	for (int i = 0; i < 200; i++) {
-		principal.x.push_back(columnas);
-		columnas += 10;
-	}
-	int filas = 0;
-	for (int i = 0; i < 10; i++) {
-		principal.y.push_back(filas);
-		filas + 15;
-	}
-	principal.run_object(argc, argv);
-	return 0;
-}
+		principal.run_object(argc, argv);
+		return 0;
+	};
