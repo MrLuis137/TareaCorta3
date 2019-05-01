@@ -1,41 +1,42 @@
-#pragma once
-#include "Simple_window.h" // get access to our window library
-#include "Graph.h" // get access to our graphics library facilities
+#include <stdlib.h>
+#include <stdio.h>
+#include <sstream>
 #include <cstdlib>
+#include <iostream>
+#include <ctime>
+
+#include <FL/Fl.H>
+#include <FL/Fl_Widget.H>
+#include <FL/Fl_Window.H>
+#include <FL/Fl_Input.H>
+#include <FL/Fl_Int_Input.H>
+#include <FL/Fl_Button.H>
+#include <FL/Fl_Color_Chooser.H>
+
+#include "Graph.h"
+#include "GUI.h"
+#include "Point.h"
 #include "arbolRN.h"
 #include "Logica.h"
-#include <ctime>
-#include<FL/Fl.h>
-#include<FL/Fl_Box.h>
-#include<FL/Fl_Window.h>
-#include<FL/Fl_Input.h>
-#include<FL/Fl_Button.H>
-#include <FL/Fl_Draw.H>
 
-
-int main()
+int main(int argc, char ** argv)
 {
-	srand((unsigned)time(NULL));
-	//Simple_window win{ tl,600,400,"Canvas" };
 	Logica principal;
-	Fl_Window window(500, 500, "Window title");
-	Line horizontal{ Point{20,10},Point{200,100} };
-	Simple_window win1{ Point(44,00),600,400,"two lines" };
-	win1.attach(horizontal);
-	Circle c1{ Point{100,200},50 };
-	c1.set_fill_color(Color::blue);
-	win1.attach(c1);
-	Fl_Input entrada(50, 400, 40, 20);
-	Fl_Button ok(110, 400, 45, 30, "Ok");
-	int * perm = principal.genere(40);
-	for (int i = 0; i < 40; i++)
-	{
-		cout << perm[i] << " ";
 
-	}
-	//ok.callback(principal.ok_callback, main);
+	int width = 90, height = 80;
+	int rowmax = 4, colmax = 7;
 
-	window.show();
-	return Fl::run();
+	principal.set_window(width, height, rowmax, colmax);
+
+	principal.input = new Fl_Int_Input(140, rowmax * height + 20, colmax * width - 160, 20, "N° de Nodos");
+	principal.input->labelfont(FL_BOLD + FL_ITALIC);
+
+	Fl_Button* ejecutar = new Fl_Button(10, 410, 150, 30, "Ejecutar"); ejecutar->color(FL_DARK_BLUE); ejecutar->labelcolor(FL_WHITE);
+	Fl_Button* salir = new Fl_Button(490, 410, 150, 30, "Salir"); salir->color(FL_DARK_BLUE); salir->labelcolor(FL_WHITE);
+
+	ejecutar->callback(principal.F_Ejecutar, &principal);
+	salir->callback(principal.F_Salir, principal.window);
+
+	principal.run_object(argc, argv);
+	return 0;
 }
-
