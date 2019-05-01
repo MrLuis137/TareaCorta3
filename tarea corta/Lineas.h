@@ -1,5 +1,4 @@
 #pragma once
-
 class DLineas : public Fl_Widget {
 public:
 	DLineas(int X, int Y, int W, int H, const char*L = 0) : Fl_Widget(X, Y, W, H, L) {
