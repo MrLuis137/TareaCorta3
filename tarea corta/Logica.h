@@ -16,7 +16,8 @@ public:
 	Fl_Button* ejecutarP;
 	Fl_Button* limpiar;
 	Fl_Button* salir;
-	Fl_Button* prueba;
+	Fl_Button* mostrar;
+	Simple_window* sw;
 
 	int * Genere(int n);
 	int run_object(int argc, char ** argv);
@@ -88,6 +89,19 @@ void Logica::set_window(int width, int height, int rowmax, int colmax)
 {
 	window = new Fl_Window(colmax * width + 20, rowmax * height + 80);
 	window->color(FL_DARK_BLUE);
+
+	input = new Fl_Int_Input(width + 10, rowmax * height + 30, width, 30, "N° de Nodos");
+	input->labelfont(FL_BOLD + FL_ITALIC); input->labelcolor(FL_WHITE);
+
+	ejecutar = new Fl_Button(width * 2 + 20, rowmax * height + 30, width, 30, "Ejecutar"); ejecutar->color(FL_DARK_BLUE); ejecutar->labelcolor(FL_WHITE);
+	mostrar = new Fl_Button(width * 3 + 30, rowmax * height + 30, width, 30, "Mostrar"); mostrar->color(FL_DARK_BLUE); mostrar->labelcolor(FL_WHITE);
+	salir = new Fl_Button(width * 4 + 40, rowmax * height + 30, width, 30, "Salir"); salir->color(FL_DARK_BLUE); salir->labelcolor(FL_WHITE);
+
+	Fl_Scroll* scroll2 = new Fl_Scroll(20, 10, 340, 10);
+	scroll2->type(Fl_Scroll::HORIZONTAL);
+	
+	sw = new Simple_window(Point(20, 20), colmax * width + 200, rowmax * height, "");
+	sw->color(Color::black);
 }
 
 void Logica::dibujar(Fl_Widget * w, void * data)
