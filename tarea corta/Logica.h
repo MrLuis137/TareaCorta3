@@ -53,15 +53,22 @@ void Logica::F_Ejecutar(Fl_Widget * w, void * data)
 {
 	Logica *principal = reinterpret_cast<Logica*>(data);
 	principal->ival = atoi(principal->input->value());
-	printf("Integer value is %d\n", principal->ival);
-	//principal->output->value(principal->sval);
-	principal->perm = principal->Genere(principal->ival);
-	int *permutacion = principal->perm;
-	for (int i = 0; i < principal->ival; i++)
-	{
-		cout << permutacion[i] << " ";
+	if (principal->ival > 200 || principal->ival < 0) {
+		cout << "The value is incorrect, try again" << endl;
+		principal->input->value("");
 	}
-	principal->input->value("");
+	else {
+		cout << "Integer value is: " << principal->ival << endl;
+		//principal->output->value(principal->sval);
+		principal->perm = principal->Genere(principal->ival);
+		int *permutacion = principal->perm;
+		for (int i = 0; i < principal->ival; i++)
+		{
+			cout << permutacion[i] << " ";
+		}
+		cout << endl;
+		principal->input->value("");
+	}
 }
 
 void Logica::F_Salir(Fl_Widget * w, void * data)

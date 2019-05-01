@@ -23,6 +23,7 @@
     <ClInclude Include="fltk.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GUI.h" />
+    <ClInclude Include="Lineas.h" />
     <ClInclude Include="Logica.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Simple_window.h" />
