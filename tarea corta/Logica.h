@@ -83,8 +83,8 @@ void Logica::F_Salir(Fl_Widget * w, void * data)
 
 void Logica::set_window(int width, int height, int rowmax, int colmax)
 {
-	window = new Fl_Window(colmax * width + 20, rowmax * height + 240);
-	window->color(FL_DARK_GREEN);
+	window = new Fl_Window(colmax * width + 20, rowmax * height + 90);
+	window->color(FL_DARK_BLUE);
 }
 
 int Logica::run_object(int argc, char ** argv)

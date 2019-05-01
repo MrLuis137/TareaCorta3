@@ -135,7 +135,7 @@ int contarAux(link &ab, int contador) {
 	}
 	ab->x = contador;
 	contador++;
-	cout << ab->v << "columna: " << ab->x << "|";
+	cout << "|Nodo: " << ab->v << ", columna: " << ab->x;
 	if (ab->der != 0) {
 		contador = contarAux(ab->der, contador);
 	}
@@ -152,7 +152,7 @@ void filas(link & ab) {
 	int cicloActual = 0;
 	int hijos = 0;
 	int nivel = 0;
-
+	cout << endl << "---------------------------------------------" << endl;
 	q.push(ab);
 	while (!q.empty()) {
 		if (cicloActual >= ciclos) {
@@ -165,7 +165,7 @@ void filas(link & ab) {
 		ab = q.front();
 		q.pop();
 		ab->y = nivel;
-		cout << "|" << ab->v << "fila: " << ab->y;
+		cout << "|Nodo: " << ab->v << ", fila: " << ab->y;
 		if (ab->izq != 0) {
 			q.push(ab->izq);
 			hijos++;
@@ -176,4 +176,5 @@ void filas(link & ab) {
 		}
 		cicloActual++;
 	}
+	cout << "|" << endl;
 }
