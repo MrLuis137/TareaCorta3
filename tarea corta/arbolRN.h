@@ -1,5 +1,5 @@
 #pragma once
-#include <queue>
+
 #include <iostream>
 #include <string>
 
@@ -10,8 +10,6 @@ enum color { rojo, negro };
 typedef struct node *link;
 struct node { // Red-Black Tree
 	int v;
-	int x;
-	int y;
 	link izq, der;
 	color nColor;
 
@@ -126,54 +124,4 @@ void RBinsertR(link& h, int x, int sw) {
 void RBinsert(link& h, int x) {
 	RBinsertR(h, x, 0);
 	h->nColor = negro;
-}
-
-int contarAux(link &ab, int contador) {
-	if (ab == NULL) { return contador; };
-	if (ab->izq != 0) {
-		contador = contarAux(ab->izq, contador);
-	}
-	ab->x = contador;
-	contador++;
-	cout << ab->v << "columna: " << ab->x << "|";
-	if (ab->der != 0) {
-		contador = contarAux(ab->der, contador);
-	}
-	return contador;
-}
-
-void columnas(link &ab) {
-	contarAux(ab, 0);
-}
-
-void filas(link & ab) {
-	queue<link> q;
-	int ciclos = 1;
-	int cicloActual = 0;
-	int hijos = 0;
-	int nivel = 0;
-
-	q.push(ab);
-	while (!q.empty()) {
-		if (cicloActual >= ciclos) {
-			ciclos = 0;
-			cicloActual = 0;
-			ciclos = hijos;
-			hijos = 0;
-			nivel++;
-		}
-		ab = q.front();
-		q.pop();
-		ab->y = nivel;
-		cout << "|" << ab->v << "fila: " << ab->y;
-		if (ab->izq != 0) {
-			q.push(ab->izq);
-			hijos++;
-		}
-		if (ab->der != 0) {
-			q.push(ab->der);
-			hijos++;
-		}
-		cicloActual++;
-	}
 }
