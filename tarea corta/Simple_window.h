@@ -7,22 +7,22 @@ using namespace Graph_lib;
 // it provides one window with one "next" button for ultra-simple animation
 
 struct Simple_window : Window {
-	Simple_window(Point xy, int w, int h, const string& title )
-	: Window(xy,w,h,title),
-	  button_pushed(false),
-	  next_button(Point(x_max()-70,0), 70, 20, "Next", cb_next) { attach(next_button); }
+	Simple_window(Point xy, int w, int h, const string& title)
+		: Window(xy, w, h, title) {};
+	  //button_pushed(false),
+	  //next_button(Point(x_max()-70,0), 70, 20, "Next", cb_next) { attach(next_button); }
 	
-	void wait_for_button()
+	//void wait_for_button()
 	// modified event loop
 	// handle all events (as per default), but quit when button_pushed becomes true
 	// this allows graphics without control inversion
-	{
-		while (!button_pushed) Fl::wait();
-		button_pushed = false;
-		Fl::redraw();
-	}
+	//{
+		//while (!button_pushed) Fl::wait();
+		//button_pushed = false;
+		//Fl::redraw();
+	//}
 
-	Button next_button;
+	/*Button next_button;
 private:
 	bool button_pushed;
 	
@@ -33,5 +33,5 @@ private:
 	}
 
 	void next() { button_pushed = true; }
-
+	*/
 };

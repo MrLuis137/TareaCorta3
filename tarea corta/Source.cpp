@@ -13,6 +13,7 @@
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Color_Chooser.H>
 
+#include "Simple_window.h"
 #include "Graph.h"
 #include "GUI.h"
 #include "Point.h"
@@ -38,6 +39,9 @@ int main(int argc, char ** argv)
 
 	DLineas draw(10, 10, 70, 70);
 	Circle c(Point(200, 200), 50);
+	c.set_fill_color(Color::red);
+	Simple_window sw(Point(10,10), 400, 300, "");
+	sw.attach(c);
 	double x = 20, y = 20, r = 30;
 	void fl_circle(double x, double y, double r);
 	
