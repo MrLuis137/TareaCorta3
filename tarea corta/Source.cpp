@@ -26,7 +26,7 @@ int main(int argc, char ** argv)
 {
 	Logica principal;
 
-	int width = 90, height = 80;
+	int width = 1990, height = 80;
 	int rowmax = 4, colmax = 7;
 
 	principal.set_window(width, height, rowmax, colmax);
@@ -43,13 +43,22 @@ int main(int argc, char ** argv)
 	x.add(Point{ 100,100 }, Point{ 200,100 });
 	x.set_fill_color(Color::red);
 
-	Simple_window sw(Point(10, 10), colmax * width, rowmax * height, "");
-	sw.attach(c);
-	sw.attach(x);
+	
+
+	//sw.attach(x);
 
 	ejecutar->callback(principal.F_Ejecutar, &principal);
 	salir->callback(principal.F_Salir, principal.window);
-
+	int columnas = 0;
+	for (int i = 0; i < 200; i++) {
+		principal.x.push_back(columnas);
+		columnas += 10;
+	}
+	int filas = 0;
+	for (int i = 0; i < 10; i++) {
+		principal.y.push_back(filas);
+		filas + 15;
+	}
 	principal.run_object(argc, argv);
 	return 0;
 }
