@@ -33,8 +33,6 @@ int main(int argc, char ** argv)
 
 	principal.set_window(width, height, rowmax, colmax);
 
-	
-
 	principal.ejecutar->callback(principal.F_Ejecutar, &principal);
 	principal.salir->callback(principal.F_Salir, principal.window);
 

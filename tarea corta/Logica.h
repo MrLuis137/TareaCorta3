@@ -76,6 +76,7 @@ void Logica::F_Ejecutar(Fl_Widget * w, void * data)
 	principal->arbol->show(10);
 	cout << "\n";
 	principal->input->value("");
+	principal->sw->hide();
 }
 
 void Logica::F_Salir(Fl_Widget * w, void * data)
