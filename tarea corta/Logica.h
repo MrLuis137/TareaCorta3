@@ -5,6 +5,7 @@ class Logica
 {
 	int* perm;
 	link arbol;
+	vector<Circle> cNodos;
 	void permutacionAleatoria(int v[], int n);
 
 public:
@@ -20,6 +21,7 @@ public:
 	int * Genere(int n);
 	int run_object(int argc, char ** argv);
 	void set_window(int, int, int, int);
+	void dibujar(Fl_Widget * w, void * data);
 	static void F_Ejecutar(Fl_Widget * w, void * data);
 	static void F_Salir(Fl_Widget * w, void * data);
 
@@ -71,6 +73,7 @@ void Logica::F_Ejecutar(Fl_Widget * w, void * data)
 	filas(principal->arbol);
 	cout << "\n";
 	principal->arbol->show(10);
+	cout << "\n";
 	principal->input->value("");
 }
 
@@ -85,6 +88,13 @@ void Logica::set_window(int width, int height, int rowmax, int colmax)
 {
 	window = new Fl_Window(colmax * width + 20, rowmax * height + 80);
 	window->color(FL_DARK_BLUE);
+}
+
+void Logica::dibujar(Fl_Widget * w, void * data)
+{
+	
+
+	
 }
 
 int Logica::run_object(int argc, char ** argv)
