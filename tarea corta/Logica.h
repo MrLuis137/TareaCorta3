@@ -1,4 +1,6 @@
 #pragma once
+#include <cstdlib>
+#include <ctime>
 class Logica
 {
 	int* perm;
@@ -30,6 +32,7 @@ public:
 void Logica::permutacionAleatoria(int v[], int n)
 {
 	int i, k, temp;
+	srand(time(NULL));
 	for (i = 0; i < n; i++)
 	{
 		k = rand() % n;
@@ -53,22 +56,22 @@ void Logica::F_Ejecutar(Fl_Widget * w, void * data)
 {
 	Logica *principal = reinterpret_cast<Logica*>(data);
 	principal->ival = atoi(principal->input->value());
-	if (principal->ival > 200 || principal->ival < 0) {
-		cout << "The value is incorrect, try again" << endl;
-		principal->input->value("");
+	printf("Integer value is %d\n", principal->ival);
+	//principal->output->value(principal->sval);
+	principal->perm = principal->Genere(principal->ival);
+	int *permutacion = principal->perm;
+	for (int i = 0; i < principal->ival; i++)
+	{
+		RBinsert(principal->arbol, permutacion[i]);
+		cout << permutacion[i] << " ";
 	}
-	else {
-		cout << "Integer value is: " << principal->ival << endl;
-		//principal->output->value(principal->sval);
-		principal->perm = principal->Genere(principal->ival);
-		int *permutacion = principal->perm;
-		for (int i = 0; i < principal->ival; i++)
-		{
-			cout << permutacion[i] << " ";
-		}
-		cout << endl;
-		principal->input->value("");
-	}
+	cout << "\n";
+	columnas(principal->arbol);
+	cout << "\n";
+	filas(principal->arbol);
+	cout << "\n";
+	principal->arbol->show(10);
+	principal->input->value("");
 }
 
 void Logica::F_Salir(Fl_Widget * w, void * data)
@@ -80,8 +83,8 @@ void Logica::F_Salir(Fl_Widget * w, void * data)
 
 void Logica::set_window(int width, int height, int rowmax, int colmax)
 {
-	window = new Fl_Window(colmax * width + 20, rowmax * height + 240);
-	window->color(FL_DARK_GREEN);
+	window = new Fl_Window(colmax * width + 20, rowmax * height + 80);
+	window->color(FL_DARK_BLUE);
 }
 
 int Logica::run_object(int argc, char ** argv)
