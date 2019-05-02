@@ -146,7 +146,8 @@ void columnas(link &ab) {
 	contarAux(ab, 0);
 }
 
-void filas(link & ab) {
+void filas(link & ar) {
+	link ab = ar;
 	queue<link> q;
 	int ciclos = 1;
 	int cicloActual = 0;
