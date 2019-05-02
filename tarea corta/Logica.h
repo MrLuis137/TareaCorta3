@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdlib>
+#include <FL/Fl_Widget.H>
 #include <ctime>
 class Logica
 {
@@ -63,29 +64,19 @@ int * Logica::Genere(int n)
 
 void Logica::F_Ejecutar(Fl_Widget * w, void * data)
 {
+	
 	Logica *principal = reinterpret_cast<Logica*>(data);
 	principal->ival = atoi(principal->input->value());
 	printf("Integer value is %d\n", principal->ival);
-	//principal->output->value(principal->sval);
 	principal->perm = principal->Genere(principal->ival);
 	int *permutacion = principal->perm;
 	for (int i = 0; i < principal->ival; i++)
 	{
-		//if(principal->arbol != NULL){ cout << "\n" << principal->arbol->v; }
 		RBinsert(principal->arbol, permutacion[i]);
-		//cout << "\n" << principal->arbol->v;
 		cout << permutacion[i] << " ";
 	}
-	cout << "\n";
 	columnas(principal->arbol);
-	cout << "\n";
-	cout << "\n" << principal->arbol->v;
 	filas(principal->arbol);
-	cout << "\n";
-	cout << "\n" << principal->arbol->v;
-	principal->arbol->show(10);
-	cout << "\n";
-	principal->input->value("");
 	principal->dibujar();
 }
 
@@ -164,21 +155,9 @@ void Logica::dibujarHder(link ab, Point padre) {
 		dibujarHder(ab->der, nodo);
 	}
 	if (ab->izq != NULL) {
-		dibujarHizq(ab->izq, nodo);
-	}
-}
-
-void Logica::dibujarHizq(link ab, Point padre) {
-	int posX = x.at(ab->x);
-	int posY = x.at(ab->y);
-	Point nodo(posX, posY);
-	dibujarLinea(padre, nodo);
-	dibujarCirculo(nodo, ab->scolor());
-	if (ab->der != NULL) {
-		dibujarHder(ab->der, nodo);
-	}
-	if (ab->izq != NULL) {
 		dibujarHder(ab->izq, nodo);
 	}
 }
+
+
 
