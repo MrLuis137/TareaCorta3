@@ -6,7 +6,6 @@ class Logica
 {
 	int* perm;
 	link arbol;
-	vector<Circle> cNodos;
 	void permutacionAleatoria(int v[], int n);
 
 public:
@@ -17,7 +16,6 @@ public:
 	Fl_Button* ejecutarP;
 	Fl_Button* limpiar;
 	Fl_Button* salir;
-	Fl_Button* mostrar;
 	Simple_window* sw;
 	vector<int> x;
 	vector<int> y;
@@ -27,8 +25,7 @@ public:
 	void dibujarCirculo(Point posicion, string color);
 	void dibujarLinea(Point posicion, Point color);
 	void dibujar();
-	void dibujarHder(link ab, Point padre);
-	void dibujarHizq(link ab, Point padre);
+	void dibujarAux(link ab, Point padre);
 	void set_window(int, int, int, int);
 	static void F_Ejecutar(Fl_Widget * w, void * data);
 	static void F_Salir(Fl_Widget * w, void * data);
@@ -64,20 +61,27 @@ int * Logica::Genere(int n)
 
 void Logica::F_Ejecutar(Fl_Widget * w, void * data)
 {
-	
 	Logica *principal = reinterpret_cast<Logica*>(data);
 	principal->ival = atoi(principal->input->value());
-	printf("Integer value is %d\n", principal->ival);
-	principal->perm = principal->Genere(principal->ival);
-	int *permutacion = principal->perm;
-	for (int i = 0; i < principal->ival; i++)
-	{
-		RBinsert(principal->arbol, permutacion[i]);
-		cout << permutacion[i] << " ";
+	if (principal->ival <= 200 && principal->ival >= 1) {
+		printf("Integer value is %d\n", principal->ival);
+		principal->perm = principal->Genere(principal->ival);
+		int *permutacion = principal->perm;
+		for (int i = 0; i < principal->ival; i++)
+		{
+			RBinsert(principal->arbol, permutacion[i]);
+			cout << permutacion[i] << " ";
+		}
+		columnas(principal->arbol);
+		filas(principal->arbol);
+		principal->dibujar();
+		principal->ejecutar->hide();
+		principal->input->hide();
 	}
-	columnas(principal->arbol);
-	filas(principal->arbol);
-	principal->dibujar();
+	else {
+		cout << "No es un numero valido" << endl;
+		principal->input->value("");
+	}
 }
 
 void Logica::F_Salir(Fl_Widget * w, void * data)
@@ -90,19 +94,18 @@ void Logica::F_Salir(Fl_Widget * w, void * data)
 void Logica::set_window(int width, int height, int rowmax, int colmax)
 {
 	window = new Fl_Window(colmax * width + 20, rowmax * height + 80);
-	window->color(FL_DARK_BLUE);
+	window->color(fl_rgb_color(210, 10, 10));
 
 	input = new Fl_Int_Input(width + 10, rowmax * height + 30, width, 30, "N° de Nodos");
 	input->labelfont(FL_BOLD + FL_ITALIC); input->labelcolor(FL_WHITE);
 
-	ejecutar = new Fl_Button(width * 2 + 20, rowmax * height + 30, width, 30, "Ejecutar"); ejecutar->color(FL_DARK_BLUE); ejecutar->labelcolor(FL_WHITE);
-	mostrar = new Fl_Button(width * 3 + 30, rowmax * height + 30, width, 30, "Mostrar"); mostrar->color(FL_DARK_BLUE); mostrar->labelcolor(FL_WHITE);
-	salir = new Fl_Button(width * 4 + 40, rowmax * height + 30, width, 30, "Salir"); salir->color(FL_DARK_BLUE); salir->labelcolor(FL_WHITE);
+	ejecutar = new Fl_Button(width * 2 + 20, rowmax * height + 30, width, 30, "Ejecutar"); ejecutar->color(fl_rgb_color(64, 94, 138)); ejecutar->labelcolor(FL_WHITE);
+	salir = new Fl_Button(colmax * width - 80, rowmax * height + 30, width, 30, "Salir"); salir->color(fl_rgb_color(64, 94, 138)); salir->labelcolor(FL_WHITE);
 
-	Fl_Scroll* scroll2 = new Fl_Scroll(20, 10, 340, 10);
+	Fl_Scroll* scroll2 = new Fl_Scroll(20, 10, colmax * width, 10);
 	scroll2->type(Fl_Scroll::HORIZONTAL);
 
-	sw = new Simple_window(Point(20, 20), colmax * width + 1990, rowmax * height, "");
+	sw = new Simple_window(Point(20, 20), colmax * width + 1600, rowmax * height, "");
 	sw->color(Color::white);
 }
 
@@ -138,26 +141,23 @@ void Logica::dibujar() {
 	Point padre(posX,posY);
 	dibujarCirculo(padre, arbol->scolor());
 	if (arbol->der != NULL) {
-		dibujarHder(arbol->der, padre);
+		dibujarAux(arbol->der, padre);
 	}
 	if (arbol->izq != NULL) {
-		dibujarHder(arbol->izq, padre);
+		dibujarAux(arbol->izq, padre);
 	}
-
 }
-void Logica::dibujarHder(link ab, Point padre) {
+
+void Logica::dibujarAux(link ab, Point padre) {
 	int posX = x.at(ab->x);
 	int posY = x.at(ab->y);
 	Point nodo(posX, posY);
 	dibujarLinea(padre, nodo);
 	dibujarCirculo(nodo, ab->scolor());
 	if (ab->der != NULL) {
-		dibujarHder(ab->der, nodo);
+		dibujarAux(ab->der, nodo);
 	}
 	if (ab->izq != NULL) {
-		dibujarHder(ab->izq, nodo);
+		dibujarAux(ab->izq, nodo);
 	}
 }
-
-
-

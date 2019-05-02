@@ -41,7 +41,6 @@ int main(int argc, char ** argv)
 		principal.y.push_back(filas);
 		filas += 15;
 	}
-
 	principal.ejecutar->callback(principal.F_Ejecutar, &principal);
 	principal.salir->callback(principal.F_Salir, principal.window);
 
