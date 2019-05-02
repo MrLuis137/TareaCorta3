@@ -24,6 +24,7 @@ public:
 	int * Genere(int n);
 	int run_object(int argc, char ** argv);
 	void dibujarCirculo(Point posicion, string color);
+	void dibujarLinea(Point posicion, Point color);
 	void dibujar();
 	void dibujarHder(link ab, Point padre);
 	void dibujarHizq(link ab, Point padre);
@@ -110,7 +111,7 @@ void Logica::set_window(int width, int height, int rowmax, int colmax)
 	Fl_Scroll* scroll2 = new Fl_Scroll(20, 10, 340, 10);
 	scroll2->type(Fl_Scroll::HORIZONTAL);
 
-	sw = new Simple_window(Point(20, 20), colmax * width + 200, rowmax * height, "");
+	sw = new Simple_window(Point(20, 20), colmax * width + 1990, rowmax * height, "");
 	sw->color(Color::white);
 }
 
@@ -130,6 +131,14 @@ void Logica::dibujarCirculo(Point posicion, string color) {
 		c->set_fill_color(Color::black);
 	}
 	sw->attach(*c);
+	sw->redraw();
+}
+
+void Logica::dibujarLinea(Point posicion1, Point posicion2) {
+	Line *l = new Line(posicion1, posicion2);
+	l->set_color(Color::black);
+	sw->attach(*l);
+	sw->redraw();
 }
 
 void Logica::dibujar() {
@@ -149,6 +158,7 @@ void Logica::dibujarHder(link ab, Point padre) {
 	int posX = x.at(ab->x);
 	int posY = x.at(ab->y);
 	Point nodo(posX, posY);
+	dibujarLinea(padre, nodo);
 	dibujarCirculo(nodo, ab->scolor());
 	if (ab->der != NULL) {
 		dibujarHder(ab->der, nodo);
@@ -162,6 +172,7 @@ void Logica::dibujarHizq(link ab, Point padre) {
 	int posX = x.at(ab->x);
 	int posY = x.at(ab->y);
 	Point nodo(posX, posY);
+	dibujarLinea(padre, nodo);
 	dibujarCirculo(nodo, ab->scolor());
 	if (ab->der != NULL) {
 		dibujarHder(ab->der, nodo);
