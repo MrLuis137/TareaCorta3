@@ -122,7 +122,7 @@ int Logica::run_object(int argc, char ** argv)
 }
 
 void Logica::dibujarCirculo(Point posicion, string color) {
-	static Circle *c = new Circle(posicion, 5);
+	Circle *c = new Circle(posicion, 5);
 	if (color == "rojo") {
 		c->set_fill_color(Color::red);
 	}
